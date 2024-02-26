@@ -1,8 +1,8 @@
-# work01
+# work 2/27
 ## work
 ワークの中身は以下のURLにあります。
 こちらの指示をもとにプログラムを作成してください。  
-https://github.com/tpa-saibugas2/java/tree/main/21%20workbook
+https://github.com/tpa-saibugas2/springboot/tree/main/21%20workbook
 
 ## 提出方法
 
