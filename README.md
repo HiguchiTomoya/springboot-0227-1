@@ -8,7 +8,7 @@ https://github.com/tpa-saibugas2/springboot/tree/main/21%20workbook
 
 1. このリポジトリを`clone`します。
 1. 自分の名前のブランチを作成します。
-1. 作成したspringプロジェクトのsrcフォルダをこちらにコピーしてください。
+1. 作成したspringプロジェクトフォルダの中身をすべてこのフォルダにコピーしてください。
 1. commit & pushし、GitHub上でプルリクエストを作成します。
 
 もし不明点があればSlackでお知らせください :D
