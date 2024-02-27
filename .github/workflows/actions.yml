@@ -21,7 +21,7 @@ jobs:
           run: pip install -r ai_tool/requirements.txt
         - name: Analyze the code
           env:
-            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+            AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
           run: |
             python ai_tool/code_analyzer/analyze.py . --analysis_result_json_file=analysis_results.json
             ls -R
