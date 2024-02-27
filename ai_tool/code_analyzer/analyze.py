@@ -1,10 +1,10 @@
-from openai import OpenAI
 import argparse
 import fnmatch
 import json
 import os
 import re
 import subprocess
+import requests
 
 def read_gitignore_patterns(source_dir_path):
     gitignore_path = os.path.join(source_dir_path, '.gitignore')
@@ -92,11 +92,10 @@ def get_prompt_text(source_dir_path, allowed_directories):
     return prompt_template, git_diff_output, file_paths
 
 def analyze_code_with_gpt(source_dir_path, log_file_path=None, model="gpt-4-turbo-preview"):
-    client = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
     allowed_directories = ['src']
     prompt_template, git_diff_output, file_paths = get_prompt_text(source_dir_path, allowed_directories)
 
-    max_files_per_request = 50
+    max_files_per_request = 20
     all_responses = []
 
     total_files = len(file_paths)
@@ -128,18 +127,29 @@ def analyze_code_with_gpt(source_dir_path, log_file_path=None, model="gpt-4-turb
             prompt_file.write(prompt)
 
         try:
-            completion = client.chat.completions.create(
-                model=model,
-                messages=[
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + os.getenv('AZURE_OPENAI_API_KEY')
+            }
+            data = {
+                "messages": [
                     {"role": "system", "content": "You are a coding problem quality evaluator."},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.0,
+                "temperature": 0.0,
+            }
+            response = requests.post(
+                "https://pino-aistudio-gpt4.openai.azure.com/openai/deployments/pino-gpt4-32k/chat/completions?api-version=2024-02-15-preview",
+                headers=headers,
+                json=data
             )
-            if not completion.choices or not completion.choices[0].message:
+            response.raise_for_status()
+            completion = response.json()
+
+            if not completion.get('choices') or not completion['choices'][0].get('message'):
                 raise ValueError("Invalid response format from OpenAI API.")
 
-            gpt_evaluation_response = completion.choices[0].message.content
+            gpt_evaluation_response = completion['choices'][0]['message']['content']
             processed_response = extract_json_from_result(gpt_evaluation_response)
 
             if is_valid_json_array(processed_response):
@@ -150,6 +160,7 @@ def analyze_code_with_gpt(source_dir_path, log_file_path=None, model="gpt-4-turb
                 print("Response content:", e.response.content)
 
     return json.dumps(all_responses, indent=4)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Analyze code using GPT.")
