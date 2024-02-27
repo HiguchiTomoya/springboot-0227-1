@@ -28,7 +28,7 @@ jobs:
             cat analysis_results.json
         - name: Remove unnecessary reviews from analysis_results.json
           run: |
-            git diff origin/main_test HEAD > diff.txt
+            git diff origin/main HEAD > diff.txt
             python ai_tool/code_analyzer/validate_review_json.py diff.txt analysis_results.json  > corrected_analysis_results.json 
         - name: Leave a review on the PR
           env: 
