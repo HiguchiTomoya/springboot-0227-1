@@ -1,0 +1,40 @@
+name: Assessment
+
+on:
+    pull_request:
+        branches: [master, main, main_test]
+
+jobs:
+  ci-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Check out repository code
+          uses: actions/checkout@v2
+          with:
+            ref: ${{ github.head_ref }}
+            fetch-depth: 0
+        - name: Set up Python
+          uses: actions/setup-python@v3
+          with:
+            python-version: '3.12.2'
+        - name: Install dependencies
+          run: pip install -r ai_tool/requirements.txt
+        - name: Analyze the code
+          env:
+            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          run: |
+            python ai_tool/code_analyzer/analyze.py . --analysis_result_json_file=analysis_results.json
+            ls -R
+            cat analysis_results.json
+        - name: Remove unnecessary reviews from analysis_results.json
+          run: |
+            git diff origin/main_test HEAD > diff.txt
+            python ai_tool/code_analyzer/validate_review_json.py diff.txt analysis_results.json  > corrected_analysis_results.json 
+        - name: Leave a review on the PR
+          env: 
+            PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+            REPO_OWNER: ${{ github.repository_owner }}
+            REPO_NAME: ${{ github.repository }}
+            PULL_NUMBER: ${{ github.event.pull_request.number }}
+            COMMIT_ID: ${{ github.event.pull_request.head.sha }}
+          run: python ai_tool/code_analyzer/post_review.py

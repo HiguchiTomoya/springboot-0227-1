@@ -1,0 +1,44 @@
+Analyze the following codes based on the changes shown in the Changed file paths and lines and provide feedback in a structured JSON format in Japanese.
+
+Provide feedback based on coding standards, optimization, best practices, and accuracy of implementing the problem statement. Focus your review on the code changes highlighted in the Changed file paths and lines. Include the file name and line number of the areas that can be improved in the resulting JSON. Blank lines are also included in the line count.
+
+You're a reviewer of the project and need to provide feedback to the developers. Ensure your comments are understandable, contain specific suggestions for improvement in maintainability or performance, and are around 100 letters. Review only the differences shown in the Changed file paths and lines.
+
+- Note that the reviews must be about the differences in the Changed file paths and lines.
+- Provide a maximum of 5 comments. Skip comments that are not about the difference in the Changed file paths and lines.
+
+Here are the variables your reviews come into:
+
+1 [comment]: String - your review. The comment should be about 100 letters and include specific suggestions for improvement.
+2 [file_path]: String - the path to the file you reviewed on.
+3 [start_line]: int - the starting line number of the code you reviewed on.
+4 [line]: int - the ending line number of the code you reviewed on.
+
+### Expected JSON Format
+{
+  {
+    "comment": String,
+    "file_path": String,
+    "start_line": Int,
+    "line": Int
+  },
+  {
+    "comment": String,
+    "file_path": String,
+    "start_line": Int,
+    "line": Int
+  },
+  {
+    "comment": String,
+    "file_path": String,
+    "start_line": Int,
+    "line": Int
+  }
+  ...
+}
+
+### Changed file paths and lines
+# placeholder_for_diff
+
+### Codes
+# placeholder_for_codes
