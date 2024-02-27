@@ -32,7 +32,7 @@ jobs:
             python ai_tool/code_analyzer/validate_review_json.py diff.txt analysis_results.json  > corrected_analysis_results.json 
         - name: Leave a review on the PR
           env: 
-            PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN_KUBO }}
+            PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
             REPO_OWNER: ${{ github.repository_owner }}
             REPO_NAME: ${{ github.repository }}
             PULL_NUMBER: ${{ github.event.pull_request.number }}
