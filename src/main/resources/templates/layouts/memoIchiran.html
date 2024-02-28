@@ -1,0 +1,14 @@
+<div th:fragment="memoIchiran_fragment">
+	<h2>★メモ一覧画面★</h2>
+	<div class="memoJoho-entry" th:each="memoJoho : ${memoJohoList}">
+		<span class="memoJoho-item" th:text="${memoJoho.body}">メモ内容</span>
+		<span class="memoJoho-item"
+			th:text="' - 登録日: ' + ${#dates.format(memoJoho.createddate, 'yyyy-MM-dd')}"></span>
+		<div class="memoJoho-item">
+			<span><a th:href="@{/memoEdit/{id}(id=${memoJoho.id})}">編集</a></span>
+			<span><a th:href="@{/memoDelete/{id}(id=${memoJoho.id})}">削除</a></span>
+		</div>
+
+	</div>
+	<a href="memoInsert">メモを追加する</a>
+</div>

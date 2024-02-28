@@ -1,0 +1,14 @@
+<div th:fragment="memoEdit_fragment">
+	<h2>★メモを修正★</h2>
+	<form th:action="@{/memoUpdateSubmit/{id}(id=${memoJoho.id})}" method="post">
+		<div>
+			<label for="body">メモ情報:</label>
+			<input type="text" id="body" name="body" th:value="${memoJoho.body}" required>
+		</div>
+		<div>
+			<label>作成日時:</label>
+			<span class="memoJoho-date" th:text="${memoJoho.createddate}"></span>
+		</div>
+		<button type="submit">送信</button>
+	</form>
+</div>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>★メモアプリ★</title>
+	<link rel="stylesheet" href="/default.css">
+</head>
+
+<body>
+	<!--共通のヘッダー-->
+	<header class="headerclass">
+		<h1 class ="headerh1">★メモアプリ★</h1>
+	</header>
+
+	<!--画面コンポーネント埋め込み-->
+	<div class = "maindiv" th:insert="__${main}__"></div>
+
+	<!--共通のフッター-->
+	<footer class="footerclass">
+		<p>© 2024 メモアプリ. All rights reserved.</p>
+	</footer>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+<div th:fragment="memoInsert_fragment">
+	<h2>★メモを作成★</h2>
+	<form th:action="@{/memoInsertSubmit}" method="post">
+		<div>
+			<label for="body">memo:</label>
+			<textarea id="body" name="body" rows="5" required></textarea>
+		</div>
+		<button type="submit">送信</button>
+	</form>
+</div>

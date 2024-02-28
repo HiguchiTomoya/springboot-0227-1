@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.memo.mappers.MemoJohoMapper">
+
+	<insert id="insertMemoJoho">
+		INSERT INTO memo_joho (body,createddate)
+		VALUES (#{body}, #{createdDate})
+	</insert>
+
+	<select id="getAllMemoJoho" resultType="com.example.memo.entities.MemoJoho">
+		SELECT *
+		FROM memo_joho
+	</select>
+
+	<select id="getMemoJoho" resultType="com.example.memo.entities.MemoJoho">
+		SELECT *
+		FROM memo_joho
+		WHERE id = #{id}
+	</select>
+
+	<update id="editMemoJoho">
+		UPDATE memo_joho
+		SET body = #{body}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deleteMemoJoho">
+		DELETE FROM memo_joho
+		WHERE id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,14 @@
+<div th:fragment="memoSearch_fragment">
+	<h2>★メモを検索★</h2>
+	<form th:action="@{/memoSearchSubmit}" method="post">
+		<div>
+			<label for="keyword">メモに含まれるワードを入力してください。：</label>
+			<textarea id="keyword" name="keyword" rows="1"></textarea>
+		</div>
+		<div>
+			<label for="date">検索する日付を選択してください：</label>
+			<input type="date" id="diarydate" name="diarydate">
+		</div>
+		<button type="submit">送信</button>
+	</form>
+</div>

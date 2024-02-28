@@ -1,0 +1,34 @@
+* {
+	margin: 0px;
+	padding: 0px;
+}
+
+.headerclass {
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	/* 上部に1pxの境界線を追加 */
+}
+
+.footerclass {
+	text-align: center;
+	border-top: 1px solid #ddd;
+	/* 上部に1pxの境界線を追加 */
+	padding: 10px;
+}
+
+.maindiv {
+	text-align: center;
+	margin: 10px;
+}
+
+.memoJoho-entry {
+	display: grid;
+	grid-auto-flow: column;
+}
+
+.memoJoho-item {
+	border: 1px solid #ddd;
+	/* アイテムごとの罫線 */
+	padding: 20px;
+	text-align: center;
+}
